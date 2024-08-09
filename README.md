@@ -1,8 +1,24 @@
-## Moneyballs - Vue 3: Connect Quasar 2 App to Firebase Cloud Firestore
-All source code files from the Moneyballs app from the "Vue 3: Connect Quasar 2 App to Firebase Cloud Firestore" course.
+# Moneyballs (quasar-moneyballs)
 
-### How to use this repository
+A Quasar Project
 
-Each Module in the course has it's own branch in the repository. To see the code for a specific lesson, just select that branch from the branch drop-down (top-left). E.g. The module-6 branch contains the final code for Module 6 in the course.
+## Install the dependencies
+```bash
+yarn
+# or
+npm install
+```
 
-**Course link:** TODO: Add this
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
+quasar dev
+```
+
+
+### Build the app for production
+```bash
+quasar build
+```
+
+### Customize the configuration
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
