@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <q-list bordered separator>
         <q-slide-item 
-          v-for="entry in entries" :key="entry.id" 
+          v-for="entry in storeEntries.entries" :key="entry.id" 
           @right="onEntrySlideRight($event, entry)" 
           right-color="negative"
         >
@@ -24,15 +24,8 @@
     </div>
 
     <q-footer class="bg-transparent">
-      <div class="row q-mb-sm q-px-md q-py-sm shadow-up-3">
-        <div class="col text-grey-7 text-h6">
-          Balance:
-        </div>
-        <div :class="useAmountColorClass(balance)" class="col text-h6 text-right">
-          {{ useCurrencify(balance) }}
-        </div>
-      </div>
-      <q-form @submit="addEntry" class="row q-px-sm q-pb-sm q-col-gutter-sm bg-primary">
+<Balance />
+      <q-form @submit="addEntryFormSubmit" class="row q-px-sm q-pb-sm q-col-gutter-sm bg-primary">
         <div class="col">
           <q-input v-model="addEntryForm.name" ref="nameRef" placeholder="Name" bg-color="white" outlined dense />
         </div>
@@ -54,51 +47,17 @@
   imports
 */
 
-import { ref, computed, reactive } from 'vue'
-import { uid, useQuasar } from 'quasar'
+import { ref, reactive } from 'vue'
+import { useQuasar } from 'quasar'
+import { useStoreEntries } from 'src/stores/storeEntries'
 import { useCurrencify } from 'src/use/useCurrencify'
 import { useAmountColorClass } from 'src/use/useAmountColorClass'
+import Balance from 'src/components/Entries/Balance.vue'
+
+/* Store */
+const storeEntries  = useStoreEntries();
 
 const $q = useQuasar();
-
-/*
-  entries
-*/
-
-const entries = ref([
-  {
-    id: 'id1',
-    name: 'Salary',
-    amount: 4999.99
-  },
-  {
-    id: 'id2',
-    name: 'Rent',
-    amount: -999
-  },
-  {
-    id: 'id3',
-    name: 'Phone',
-    amount: -14.99
-  },
-  {
-    id: 'id4',
-    name: 'Unknown',
-    amount: 0
-  },
-])
-
-
-/*
-  balance
-*/
-
-const balance = computed(() => {
-  return entries.value.reduce((accumulator, { amount }) => {
-    return accumulator + amount
-  }, 0)
-})
-
 
 /*
   add entry
@@ -115,14 +74,14 @@ const addEntryForm = reactive({
   ...addEntryFormDefault
 })
 
+// Reset add entry form
 const addEntryFormReset = () => {
   Object.assign(addEntryForm, addEntryFormDefault)
   nameRef.value.focus()
 }
-
-const addEntry = () => {
-  const newEntry = Object.assign({}, addEntryForm, { id: uid() })
-  entries.value.push(newEntry)
+/* add Entry Form Submit*/
+const addEntryFormSubmit = () => {
+  storeEntries.addEntry(addEntryForm);
   addEntryFormReset()
 }
 
@@ -153,24 +112,9 @@ const onEntrySlideRight = ({reset}, entry) => {
     }
     
   }).onOk(() => {
-    deleteEntry(entry.id)
+    storeEntries.deleteEntry(entry.id)
   }).onCancel(() => {
     reset()
   })
 }
-
-const deleteEntry = (entryId) => {
-  console.log('delete entry '+entryId)
-  const index = entries.value.findIndex(entry => entry.id === entryId)
-  entries.value.splice(index, 1)
-  $q.notify({
-    color: 'negative',
-    icon: 'delete',
-    message: 'Entrada Eliminada',
-    position: 'top'
-  })
-
-}
-
-
 </script>
