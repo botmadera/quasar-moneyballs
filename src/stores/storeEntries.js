@@ -8,22 +8,26 @@ export const useStoreEntries = defineStore("entries", () => {
     {
       id: "id1",
       name: "Salary",
-      amount: 10.00,
+      amount: 13.00,
+      paid: false
     },
     {
       id: "id2",
       name: "Rent",
       amount: 10.00,
+      paid: false
     },
     {
       id: "id3",
       name: "Phone",
       amount: -20.00,
+      paid: false
     },
     {
       id: "id4",
       name: "Unknown",
       amount: 0,
+      paid: false
     },
   ]);
 
@@ -37,11 +41,19 @@ export const useStoreEntries = defineStore("entries", () => {
     }, 0);
   });
 
+   // Balance Paid
+
+   const balancePaid = computed(() => {
+    return entries.value.reduce((accumulator, { amount, paid }) => {
+      return paid? accumulator + amount: accumulator;
+    }, 0);
+  });
+
 /* actions */
 
   // Add Entry
   const addEntry = (addEntryForm) => {
-    const newEntry = Object.assign({}, addEntryForm, { id: uid() })
+    const newEntry = Object.assign({}, addEntryForm, { id: uid(), paid: false });
     entries.value.push(newEntry)
     
   }
@@ -49,7 +61,7 @@ export const useStoreEntries = defineStore("entries", () => {
   // delete Entry
   const deleteEntry = (entryId) => {
     console.log('delete entry '+entryId)
-    const index = entries.value.findIndex(entry => entry.id === entryId)
+    const index = getEntryIndexById(entryId);
     entries.value.splice(index, 1)
     Notify.create({
       color: 'negative',
@@ -58,6 +70,20 @@ export const useStoreEntries = defineStore("entries", () => {
     })
   
   }
+
+  /* Update Entry */
+  const updateEntry = (entryId, updates) => {
+    const index = getEntryIndexById(entryId);
+    Object.assign(entries.value[index], updates)
+  }
+
+
+  /* Helpers */
+  const getEntryIndexById = (entryId) => {
+    return entries.value.findIndex(entry => entry.id === entryId)
+  }
+
+
   /*returns */
-  return { entries, balance, addEntry, deleteEntry };
+  return { entries, balance, balancePaid, addEntry, deleteEntry, updateEntry };
 });
