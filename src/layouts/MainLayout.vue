@@ -17,7 +17,14 @@
             Moneyballs
           </div>
         </q-toolbar-title>
-
+        <q-btn
+          v-if="$route.path === '/'"
+          @click="storeEntries.options.sort = !storeEntries.options.sort"
+          :label="!storeEntries.options.sort? 'Sort':'Done'" 
+          :color="!storeEntries.options.sort? 'purple':'green'"
+          no-caps 
+          dense 
+        />
       </q-toolbar>
     </q-header>
 
@@ -53,11 +60,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useStoreEntries } from 'src/stores/storeEntries';
 import NavLink from 'components/Nav/NavLink.vue'
 
 defineOptions({
   name: 'MainLayout'
 })
+
+const storeEntries = useStoreEntries()
 
 const navLinks = [
   {
