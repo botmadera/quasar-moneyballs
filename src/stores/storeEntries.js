@@ -31,10 +31,13 @@ export const useStoreEntries = defineStore("entries", () => {
     },
   ]);
 
+
+
   const options = reactive({
     sort:true
   });
   /* getters */
+
 
   // Balance
 
@@ -52,6 +55,20 @@ export const useStoreEntries = defineStore("entries", () => {
     }, 0);
   });
 
+  // Running Balance
+  const runningBalances = computed(() => {
+    let runningBalances = [],
+      currentRunningBalance = 0;
+
+    if(entries.value.length) {
+      entries.value.forEach(entry => {
+        let entryAmount = entry.amount ? entry.amount : 0;
+        currentRunningBalance += entryAmount;
+        runningBalances.push(currentRunningBalance);
+      })
+    }
+    return runningBalances;
+  });
 /* actions */
 
   // Add Entry
@@ -103,5 +120,7 @@ export const useStoreEntries = defineStore("entries", () => {
     addEntry, 
     deleteEntry, 
     updateEntry, 
-    sortEnd };
+    sortEnd,
+    runningBalances
+  };
 });

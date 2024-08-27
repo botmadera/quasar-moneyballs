@@ -1,8 +1,15 @@
 <template>
   <q-page>
     <div class="q-pa-md">
+
+    <transition
+      appear
+      enter-active-class="animated jackInTheBox slower"
+    >
       <NothingHere v-if="storeEntries.entries.length === 0" />
-      <q-list v-else class="entries">
+    </transition>
+
+      <q-list v-if="storeEntries.entries.length" class="entries">
         <Sortable 
           @end="storeEntries.sortEnd"
           :list="storeEntries.entries" 
@@ -12,7 +19,11 @@
         >
           <template #item="{ element, index }">
             <!-- Entry.vue -->
-            <Entry :key="element.id" :entry="element" />
+            <Entry 
+              :key="element.id" 
+              :entry="element" 
+              :index="index"
+            />
           </template>
         </Sortable>
 
@@ -20,7 +31,13 @@
     </div>
 
     <q-footer class="bg-transparent">
-      <Balance />
+      <transition
+      appear
+      enter-active-class="animated fadeInUp slower"
+      leave-active-class="animated fadeOutDown slower"
+    >
+      <Balance v-if="storeEntries.entries.length" />
+    </transition>
       <!-- addEntry goes here -->
       <AddEntry />
     </q-footer>

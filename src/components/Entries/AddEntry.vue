@@ -10,6 +10,7 @@
                     ref="nameRef" 
                     placeholder="Name" 
                     bg-color="white" 
+                    v-select-all        
                     outlined 
                     dense 
                 />
@@ -22,6 +23,7 @@
                     placeholder="Amount"
                     input-class="text-right" 
                     bg-color="white" 
+                    v-select-all
                     outlined 
                     dense />
             </div>
@@ -44,6 +46,7 @@
 
 import { ref, reactive } from 'vue'
 import { useStoreEntries } from 'src/stores/storeEntries'
+import vSelectAll from 'src/directives/directiveSelectAll'
 
 /* Store */
 const storeEntries = useStoreEntries();

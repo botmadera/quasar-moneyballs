@@ -26,6 +26,12 @@ import '@quasar/extras/material-icons/material-icons.css'
 
 
 
+import '@quasar/extras/animate/jackInTheBox.css'
+
+import '@quasar/extras/animate/fadeInUp.css'
+
+import '@quasar/extras/animate/fadeOutDown.css'
+
 
 // We load Quasar stylesheet file
 import 'quasar/dist/quasar.sass'
