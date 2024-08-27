@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed, reactive } from "vue";
-import { uid, Notify, useQuasar } from "quasar";
+import { uid, Notify, useQuasar, event } from "quasar";
 
 export const useStoreEntries = defineStore("entries", () => {
   /* state */
@@ -80,6 +80,13 @@ export const useStoreEntries = defineStore("entries", () => {
     Object.assign(entries.value[index], updates)
   }
 
+  /* Sort End */
+  const sortEnd = ({ oldIndex, newIndex}) => {
+    const movedEntry = entries.value[oldIndex];
+    entries.value.splice(oldIndex, 1);
+    entries.value.splice(newIndex, 0, movedEntry)
+  }
+
 
   /* Helpers */
   const getEntryIndexById = (entryId) => {
@@ -88,5 +95,13 @@ export const useStoreEntries = defineStore("entries", () => {
 
 
   /*returns */
-  return { options, entries, balance, balancePaid, addEntry, deleteEntry, updateEntry };
+  return { 
+    options, 
+    entries, 
+    balance, 
+    balancePaid, 
+    addEntry, 
+    deleteEntry, 
+    updateEntry, 
+    sortEnd };
 });

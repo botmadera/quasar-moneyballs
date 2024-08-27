@@ -2,9 +2,11 @@
   <q-page>
     <div class="q-pa-md">
       <NothingHere v-if="storeEntries.entries.length === 0" />
-      <q-list v-else bordered separator>
+      <q-list v-else class="entries">
         <Sortable 
+          @end="storeEntries.sortEnd"
           :list="storeEntries.entries" 
+          :options="{ handle: '.handle' }"
           item-key="id" 
           tag="div"
         >

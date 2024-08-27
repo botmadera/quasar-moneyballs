@@ -71,6 +71,7 @@
             >
               <q-icon 
                 name="reorder"
+                class="handle"
                 color="primary"
               />
             </q-item-section>
