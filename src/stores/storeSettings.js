@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref, computed, reactive } from "vue";
-import { uid, Notify, useQuasar, event } from "quasar";
+import { ref, watch, reactive } from "vue";
+import { Dark, useQuasar } from "quasar";
 
 export const useStoreSettings = defineStore("settings",()=> {
 
@@ -11,7 +11,13 @@ export const useStoreSettings = defineStore("settings",()=> {
     currencySymbol: "$",
     darkMode: false, // false | true | 'auto
   });
-
+  /* watch */
+  watch(
+    () => settings.darkMode,
+    (value) => {
+      Dark.set(value);
+    }
+  );
   /* getters */
 
   /* actions */

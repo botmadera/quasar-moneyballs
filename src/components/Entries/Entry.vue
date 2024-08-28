@@ -1,6 +1,6 @@
 <template>
   <q-slide-item @left="onEntrySlideLeft" @right="onEntrySlideRight" left-color="positive" right-color="negative"
-    :class="{ 'bg-grey-3': entry.paid }">
+    :class="!entry.paid?useLightOrDark('bg-white', 'bg-black'):useLightOrDark('bg-grey-2', 'bg-grey-9')">
 
     <template v-slot:left>
       <q-icon name="done" />
@@ -64,6 +64,7 @@ import { useCurrencify } from 'src/use/useCurrencify'
 import { useAmountColorClass } from 'src/use/useAmountColorClass'
 import vSelectAll from 'src/directives/directiveSelectAll'
 import { useStoreSettings } from 'src/stores/storeSettings'
+import { useLightOrDark } from 'src/use/useLightOrDark'
 /* Quasar */
 const $q = useQuasar();
 

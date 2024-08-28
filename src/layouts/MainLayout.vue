@@ -1,6 +1,8 @@
 <template>
   <q-layout view="hHh lpR lFf">
-    <q-header elevated>
+    <q-header 
+      :elevated="useLightOrDark(true, false)"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -62,6 +64,7 @@
 import { ref } from 'vue'
 import { useStoreEntries } from 'src/stores/storeEntries';
 import NavLink from 'components/Nav/NavLink.vue'
+import { useLightOrDark } from 'src/use/useLightOrDark';
 
 defineOptions({
   name: 'MainLayout'
