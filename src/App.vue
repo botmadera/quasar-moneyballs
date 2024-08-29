@@ -3,6 +3,16 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useStoreSettings } from 'src/stores/storeSettings';
+
+const storeSettings = useStoreSettings();
+
+
+onMounted(() => {
+  storeSettings.loadSettings();
+});
+
 defineOptions({
   name: 'App'
 });
