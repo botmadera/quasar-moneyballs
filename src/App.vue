@@ -5,12 +5,14 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useStoreSettings } from 'src/stores/storeSettings';
+import { useStoreEntries } from 'src/stores/storeEntries';
 
 const storeSettings = useStoreSettings();
-
+const storeEntries = useStoreEntries(); 
 
 onMounted(() => {
   storeSettings.loadSettings();
+  storeEntries.loadEntries();
 });
 
 defineOptions({
