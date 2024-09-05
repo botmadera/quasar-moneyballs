@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, computed, reactive, watch } from "vue";
+import { ref, computed, reactive, watch, nextTick } from "vue";
 import { uid, Notify, LocalStorage, event } from "quasar";
 
 export const useStoreEntries = defineStore("entries", () => {
@@ -90,9 +90,10 @@ export const useStoreEntries = defineStore("entries", () => {
 
   // delete Entry
   const deleteEntry = (entryId) => {
-    console.log('delete entry '+entryId)
+    //console.log('delete entry '+entryId)
     const index = getEntryIndexById(entryId);
     entries.value.splice(index, 1)
+    removeSlideItemIfExists(entryId);
     Notify.create({
       color: 'negative',
       position: 'top',
@@ -122,6 +123,23 @@ export const useStoreEntries = defineStore("entries", () => {
     return entries.value.findIndex(entry => entry.id === entryId)
   }
 
+  const removeSlideItemIfExists = (entryId) => {
+    // hacky fix: when deleting (after sorting),
+    // sometimes the slide item is not removed
+    // from the DOM, this will remove the slide
+    // item from the DOM if it still exists
+    // after entry removed from entries array
+
+    //console.log('entryId', entryId)
+    nextTick(() => {
+      const slideItem = document.querySelector(`#id-${entryId}`);
+      if(slideItem) {
+        slideItem.remove();
+      }
+    });
+
+
+  }
 
   /*returns */
   return { 

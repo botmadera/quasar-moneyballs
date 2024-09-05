@@ -1,6 +1,12 @@
 <template>
-  <q-slide-item @left="onEntrySlideLeft" @right="onEntrySlideRight" left-color="positive" right-color="negative"
-    :class="!entry.paid?useLightOrDark('bg-white', 'bg-black'):useLightOrDark('bg-grey-2', 'bg-grey-9')">
+  <q-slide-item 
+    @left="onEntrySlideLeft" 
+    @right="onEntrySlideRight" 
+    left-color="positive" 
+    right-color="negative"
+    :id="`id-${props.entry.id}`"
+    :class="!entry.paid?useLightOrDark('bg-white', 'bg-black'):useLightOrDark('bg-grey-2', 'bg-grey-9')"
+  >
 
     <template v-slot:left>
       <q-icon name="done" />
