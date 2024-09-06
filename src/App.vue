@@ -4,7 +4,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { userRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useStoreSettings } from 'src/stores/storeSettings';
 import { useStoreEntries } from 'src/stores/storeEntries';
 
