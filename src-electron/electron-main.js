@@ -1,18 +1,19 @@
 import { app, BrowserWindow, Menu } from 'electron'
 import path from 'path'
 import os from 'os'
+import { menu } from './menu/menu'
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
 
-let mainWindow
-const isMac = platform === 'darwin'
+export let mainWindow
 
-function createWindow () {
-  /**
+
+app.whenReady().then(()=>{
+   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow({
+   mainWindow = new BrowserWindow({
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
     width: 1000,
     height: 600,
@@ -43,9 +44,7 @@ function createWindow () {
   })
 
   Menu.setApplicationMenu(menu)
-}
-
-app.whenReady().then(createWindow)
+})
 
 app.on('window-all-closed', () => {
     app.quit()
