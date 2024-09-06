@@ -4,18 +4,20 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import { userRouter } from 'vue-router';
 import { useStoreSettings } from 'src/stores/storeSettings';
 import { useStoreEntries } from 'src/stores/storeEntries';
 
 const storeSettings = useStoreSettings();
 const storeEntries = useStoreEntries(); 
+const router = useRouter();
 
 onMounted(() => {
   storeSettings.loadSettings();
   storeEntries.loadEntries();
 
-  ipcRenderer.on('show-settings', (_event, value)=> {
-    console.log('show-settings');
+  ipcRenderer.on('show-settings', ()=> {
+    router.push('/settings');
   })
 });
 
