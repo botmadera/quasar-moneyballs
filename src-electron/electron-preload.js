@@ -27,12 +27,13 @@
  *   }
  * }
  */
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("ipcRenderer", { 
         on: (message, func) => {
-            console.log('message: ', message);
-            func();
+            return ipcRenderer.on(message, ()=>{
+                func();
+            });
         } 
     }
 );
