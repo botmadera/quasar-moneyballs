@@ -13,6 +13,10 @@ const storeEntries = useStoreEntries();
 onMounted(() => {
   storeSettings.loadSettings();
   storeEntries.loadEntries();
+
+  ipcRenderer.on('show-settings', (_event, value)=> {
+    console.log('show-settings');
+  })
 });
 
 defineOptions({

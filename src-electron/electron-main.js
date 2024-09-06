@@ -7,7 +7,7 @@ import { menuTemplate } from "./menu/menu";
 
 const menu = Menu.buildFromTemplate(menuTemplate);
 
-let mainWindow;
+export let mainWindow;
 
 /*
   app ready

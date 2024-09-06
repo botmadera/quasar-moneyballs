@@ -1,5 +1,5 @@
 import { app } from "electron";
-
+import { mainWindow } from "../electron-main";
 
 /* MENU */
 const platform = process.platform || os.platform();
@@ -13,6 +13,12 @@ export const menuTemplate = [
           label: app.name,
           submenu: [
             { role: "about" },
+            { 
+                label: 'Settings',
+                click: () => {
+                    mainWindow.webContents.send('show-settings');
+                }
+            },
             { type: "separator" },
             { role: "services" },
             { type: "separator" },
