@@ -2,6 +2,7 @@ import { app } from "electron";
 
 
 /* MENU */
+const platform = process.platform || os.platform();
 const isMac = platform === "darwin";
 
 export const menuTemplate = [

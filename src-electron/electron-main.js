@@ -4,7 +4,7 @@ import os from "os";
 import { menuTemplate } from "./menu/menu";
 
 // needed in case process is undefined under Linux
-const platform = process.platform || os.platform();
+
 const menu = Menu.buildFromTemplate(menuTemplate);
 
 let mainWindow;
