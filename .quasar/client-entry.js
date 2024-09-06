@@ -50,8 +50,10 @@ import quasarUserOptions from './quasar-user-options.js'
 
 
 
+console.info('[Quasar] Running ELECTRON.')
 
-const publicPath = `/`
+
+const publicPath = ``
 
 async function start ({
   app,
