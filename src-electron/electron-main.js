@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu } from 'electron'
 import path from 'path'
 import os from 'os'
-import { menu } from './menu/menu.js'
+import { menuTemplate } from './menu/menu.js'
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
@@ -43,7 +43,7 @@ app.whenReady().then(()=>{
     mainWindow = null
   })
 
-  Menu.setApplicationMenu(menu)
+  Menu.setApplicationMenu(menuTemplate)
 })
 
 app.on('window-all-closed', () => {
