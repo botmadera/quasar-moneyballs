@@ -1,5 +1,6 @@
 
 import { app } from "electron";
+import { mainWindows } from "../electron-main";
 
 const isMac = process.platform === "darwin";
 
@@ -12,6 +13,12 @@ export const menuTemplate = [
         label: app.name,
         submenu: [
           { role: 'about' },
+          { 
+            label: 'Settings',
+            click: () => {
+              mainWindows.webContents.send('show-settings');
+            }  
+          },
           { type: 'separator' },
           { role: 'services' },
           { type: 'separator' },
