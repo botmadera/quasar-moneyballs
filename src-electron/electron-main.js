@@ -1,18 +1,36 @@
+/* 
+ *   This file is the main entry point for Electron process
+ * 
+ */
+
+/*
+ * IMPORTS 
+ */
+
 import { app, BrowserWindow, Menu } from 'electron'
 import path from 'path'
 import os from 'os'
 import { menuTemplate } from './menu/menu.js'
+import { BlockList } from 'net'
+
+/* 
+ * Constans and variables 
+ */
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
-
+// Export so that it can be used in other files
 export let mainWindow
 
 
-app.whenReady().then(()=>{
-   /**
-   * Initial window options
-   */
+/* 
+ * APP Ready 
+ */
+
+app.whenReady().then(()=> {
+  
+  //Initial window options
+
    mainWindow = new BrowserWindow({
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
     width: 1000,
@@ -46,13 +64,10 @@ app.whenReady().then(()=>{
   Menu.setApplicationMenu(menuTemplate)
 })
 
-app.on('window-all-closed', () => {
-    app.quit()
-  
-})
+/* 
+ * EVENTS HANDLERS 
+ */
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+app.on('window-all-closed', () => {
+    app.quit()  
 })

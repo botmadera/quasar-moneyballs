@@ -8,6 +8,7 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
+    "dev:mac": "quasar dev -m electron",
     "build": "quasar build"
   },
   "dependencies": {
