@@ -13,12 +13,6 @@ export const menuTemplate = [
           label: app.name,
           submenu: [
             { role: "about" },
-            { 
-                label: 'Settings',
-                click: () => {
-                    mainWindow.webContents.send('show-settings');
-                }
-            },
             { type: "separator" },
             { role: "services" },
             { type: "separator" },
