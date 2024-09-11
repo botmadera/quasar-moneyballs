@@ -53,8 +53,10 @@
         />
         <!-- QUIT BUTTON -->
         <q-item
+          v-if="$q.platform.is.electron"
+          @click="quitApp"
           clickable
-          class="text-white"
+          class="text-white absolute-bottom"
           tag="a"
         >
           <q-item-section avatar>
@@ -78,6 +80,7 @@
 </template>
 
 <script setup>
+import { useQuasar } from 'quasar';
 import { ref } from 'vue'
 import { useStoreEntries } from 'src/stores/storeEntries';
 import NavLink from 'components/Nav/NavLink.vue'
@@ -87,6 +90,7 @@ defineOptions({
   name: 'MainLayout'
 })
 
+const $q = useQuasar()
 const storeEntries = useStoreEntries()
 
 const navLinks = [
@@ -106,5 +110,29 @@ const leftDrawerOpen = ref(false)
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+const quitApp = () => {
+  $q.dialog({
+    title: 'Confirmacion',
+    message: 'Desea salir de la app?',
+    cancel: true,
+    persistent: true,
+    html: true,
+    ok: {
+      label: 'Salir',
+      color: 'negative',
+      noCaps: true
+    },
+    cancel: {
+      label: 'Cancelar',
+      color: 'primary',
+      noCaps: true
+    }
+
+  }).onOk(() => {
+    //todo
+    console.log('quit')
+  })
 }
 </script>
