@@ -1,7 +1,7 @@
 
 import { app } from "electron";
-import { mainWindows } from "../electron-main";
-
+import { mainWindows } from "../electron-main.js";
+// edit
 const isMac = process.platform === "darwin";
 
 
