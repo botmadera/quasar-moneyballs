@@ -34,6 +34,9 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
             return ipcRenderer.on(message, ()=>{
                 func();
             });
-        } 
+        },
+        send: (message, data) => {
+            ipcRenderer.send(message, data);
+        }
     }
 );

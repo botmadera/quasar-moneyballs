@@ -131,8 +131,9 @@ const quitApp = () => {
     }
 
   }).onOk(() => {
-    //todo
-    console.log('quit')
+    if($q.platform.is.electron) {
+      ipcRenderer.send('quit-app')
+    }
   })
 }
 </script>
