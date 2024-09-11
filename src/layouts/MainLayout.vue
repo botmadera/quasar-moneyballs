@@ -51,6 +51,23 @@
           :key="link.title"
           v-bind="link"
         />
+        <!-- QUIT BUTTON -->
+        <q-item
+          clickable
+          class="text-white"
+          tag="a"
+        >
+          <q-item-section avatar>
+            <q-icon name="power_settings_new" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>
+              Quit
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <!-- QUIT BUTTON -->
+
       </q-list>
     </q-drawer>
 
