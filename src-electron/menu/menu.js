@@ -1,6 +1,6 @@
 
 import { app } from "electron";
-import { mainWindows } from "../electron-main.js";
+import { mainWindow } from "../electron-main.js";
 // edit
 const isMac = process.platform === "darwin";
 
@@ -16,7 +16,7 @@ export const menuTemplate = [
           { 
             label: 'Settings',
             click: () => {
-              mainWindows.webContents.send('show-settings');
+              mainWindow.webContents.send('show-settings');
             }  
           },
           { type: 'separator' },
