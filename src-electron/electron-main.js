@@ -74,6 +74,6 @@ app.on("window-all-closed", () => {
  * ipcMain
  */
 ipcMain.on("quit-app", () => {
-  console.log("Quit app");
+  app.quit();
 }
 );
