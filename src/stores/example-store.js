@@ -13,3 +13,4 @@ export const useCounterStore = defineStore('counter', {
     },
   },
 });
+
